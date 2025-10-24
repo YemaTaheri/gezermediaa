@@ -989,9 +989,16 @@
                     Kontakt
                 </h2>
                 <div class="grid md:grid-cols-2 gap-8 items-stretch">
-                    <form id="contactForm" name="contact" method="POST" data-netlify="true" class="contact-form p-10 md:p-14 rounded-3xl border-2 transition-all duration-1000 h-full flex flex-col opacity-0 -translate-x-24"
+                    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" class="contact-form p-10 md:p-14 rounded-3xl border-2 transition-all duration-1000 h-full flex flex-col opacity-0 -translate-x-24"
                           style="border-color: #4FC3F7; background: rgba(79,195,247,.05); box-shadow: 0 0 70px rgba(79,195,247,.4)">
-                        <input type="hidden" name="form-name" value="contact" />
+                        <!-- Web3Forms Access Key -->
+                        <input type="hidden" name="access_key" value="e7dc5f92-c941-401e-aab0-93c7aa88367a">
+                        <input type="hidden" name="subject" value="Neue Kontaktanfrage von gezermedia.de">
+                        <input type="hidden" name="from_name" value="GezerMedia Website">
+                        <input type="hidden" name="redirect" value="https://gezermedia.de#kontakt">
+                        <!-- Spam Protection -->
+                        <input type="checkbox" name="botcheck" style="display: none;">
+                        
                         <div class="space-y-8 flex-1">
                             <div>
                                 <label class="block text-gray-300 text-xl md:text-2xl mb-4 font-semibold">Name</label>
