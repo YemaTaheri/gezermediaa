@@ -1189,14 +1189,6 @@
             { name: 'brands.odaya.png', url: 'https://www.instagram.com/odaya' },
             { name: 'brands.cafe28.png', url: 'https://www.instagram.com/cafe_28' },
             { name: 'brands.burgerloft.png', url: 'https://www.instagram.com/burgerloft' },
-            { name: 'brands.kofteburger.png', url: 'https://www.instagram.com/kofteburger' },
-            { name: 'brands.lades.png', url: 'https://www.instagram.com/lades' },
-            { name: 'brands.kita.png', url: 'https://www.instagram.com/kita' },
-            { name: 'brands.oeziskabab.png', url: 'https://www.instagram.com/oeziskabab' },
-            { name: 'brands.roomyz.png', url: 'https://www.instagram.com/roomyz' },
-            { name: 'brands.sosyete.png', url: 'https://www.instagram.com/sosyete' },
-            { name: 'brands.suppkultur.png', url: 'https://www.instagram.com/suppkultur' },
-            { name: 'brands.waldhallebuechen.png', url: 'https://www.instagram.com/waldhallebuechen' }
         ];
 
         // ======================
@@ -1823,84 +1815,6 @@
         // ======================
         // CONTACT FORM SUBMISSION
         // ======================
-        const contactForm = document.getElementById('contactForm');
-        
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(contactForm);
-            const submitButton = contactForm.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.textContent;
-            
-            // Button während des Sendens deaktivieren
-            submitButton.disabled = true;
-            submitButton.textContent = 'Wird gesendet...';
-            submitButton.style.opacity = '0.6';
-            
-            fetch('/', {
-                method: 'POST',
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData).toString()
-            })
-            .then(() => {
-                // Erfolgsmeldung anzeigen
-                const successMsg = document.createElement('div');
-                successMsg.innerHTML = `
-                    <div style="position: fixed; top: 100px; left: 50%; transform: translateX(-50%); 
-                                background: linear-gradient(135deg, #4FC3F7, #00bcd4); 
-                                color: white; padding: 20px 40px; border-radius: 15px; 
-                                box-shadow: 0 10px 40px rgba(79,195,247,0.5); z-index: 10000;
-                                font-size: 18px; font-weight: bold; text-align: center;
-                                max-width: 90%;">
-                        ✅ Nachricht erfolgreich gesendet! Wir melden uns bald bei Ihnen.
-                    </div>
-                `;
-                document.body.appendChild(successMsg);
-                
-                // Formular zurücksetzen
-                contactForm.reset();
-                
-                // Button wieder aktivieren
-                submitButton.disabled = false;
-                submitButton.textContent = originalButtonText;
-                submitButton.style.opacity = '1';
-                
-                // Erfolgsmeldung nach 5 Sekunden ausblenden
-                setTimeout(() => {
-                    successMsg.style.opacity = '0';
-                    successMsg.style.transition = 'opacity 0.5s ease';
-                    setTimeout(() => successMsg.remove(), 500);
-                }, 5000);
-            })
-            .catch((error) => {
-                // Fehlermeldung
-                const errorMsg = document.createElement('div');
-                errorMsg.innerHTML = `
-                    <div style="position: fixed; top: 100px; left: 50%; transform: translateX(-50%); 
-                                background: linear-gradient(135deg, #ff5252, #f44336); 
-                                color: white; padding: 20px 40px; border-radius: 15px; 
-                                box-shadow: 0 10px 40px rgba(255,82,82,0.5); z-index: 10000;
-                                font-size: 18px; font-weight: bold; text-align: center;
-                                max-width: 90%;">
-                        ❌ Fehler beim Senden. Bitte versuchen Sie es erneut.
-                    </div>
-                `;
-                document.body.appendChild(errorMsg);
-                
-                // Button wieder aktivieren
-                submitButton.disabled = false;
-                submitButton.textContent = originalButtonText;
-                submitButton.style.opacity = '1';
-                
-                setTimeout(() => {
-                    errorMsg.style.opacity = '0';
-                    errorMsg.style.transition = 'opacity 0.5s ease';
-                    setTimeout(() => errorMsg.remove(), 500);
-                }, 5000);
-                
-                console.error('Form submission error:', error);
-            });
-        });
 
         // ======================
         // FOOTER SOCIAL HOVER
