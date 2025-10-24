@@ -726,7 +726,7 @@
                             <div class="phone-mockup bg-black rounded-[50px] overflow-hidden border-4 transition-opacity duration-300 works-video-container opacity-0"
                                  style="border-color: #4FC3F7; box-shadow: 0 0 100px rgba(79,195,247,1), 0 25px 70px rgba(0,0,0,.9)">
                                 <video id="worksVideo" loading="lazy" autoplay muted playsinline class="w-full h-full object-cover cursor-pointer">
-                                    <source src="media/videos/reels/video1.MP4" type="video/mp4">
+                                    <source src="https://pub-0cd6a35aa1c640b2ad158519852b494b.r2.dev/videos/reels/Video1.mp4" type="video/mp4">
                                 </video>
                             </div>
                             <button id="prevWork" class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-20 lg:-translate-x-28 xl:-translate-x-32 p-4 md:p-6 bg-cyan-400 rounded-full hover:bg-cyan-300 hover:scale-125 transition-all duration-300 items-center justify-center z-10"
@@ -1226,10 +1226,11 @@
         // WORKS VIDEOS
         // ======================
         const videos = [
-            'Video1.mp4', 'Video2Reel.mp4', 'Video3Reel.mp4',
-            'Video4Reel.mp4', 'Video5Reel.mp4', 'Video6Reel.mp4',
-            'Video7Reel.mp4', 'Video8Reel.mp4', 'Video9Reel.mp4'
-        ];
+                'Video1.mp4', 'Video2Reel.mp4', 'Video3Reel.mp4',
+                'Video4Reel.mp4', 'Video5Reel.mp4', 'Video6Reel.mp4',
+                'Video7Reel.mp4', 'Video8Reel.mp4', 'Video9Reel.mp4'
+            ];
+            const R2_BASE_URL = "https://pub-0cd6a35aa1c640b2ad158519852b494b.r2.dev/videos/reels";
 
         // ======================
         // INTRO SPLASH
@@ -1527,7 +1528,7 @@
         function updateWorksVideo() {
             const worksVideo = document.getElementById('worksVideo');
             const videoSource = worksVideo.querySelector('source');
-            videoSource.src = `media/videos/reels/${videos[currentWorkIndex]}`;
+            videoSource.src = `${R2_BASE_URL}/${videos[currentWorkIndex]}`;
             worksVideo.load();
             worksVideo.play();
         }
@@ -1572,7 +1573,7 @@
 
         worksVideo.addEventListener('click', () => {
             const modalSource = modalVideo.querySelector('source');
-            modalSource.src = `media/videos/reels/${videos[currentWorkIndex]}`;
+            modalSource.src = `${R2_BASE_URL}/${videos[currentWorkIndex]}`;
             modalVideo.load();
             videoModal.classList.remove('hidden');
         });
