@@ -995,7 +995,6 @@
                         <input type="hidden" name="access_key" value="e7dc5f92-c941-401e-aab0-93c7aa88367a">
                         <input type="hidden" name="subject" value="Neue Kontaktanfrage von gezermedia.de">
                         <input type="hidden" name="from_name" value="GezerMedia Website">
-                        <input type="hidden" name="redirect" value="https://gezermedia.de#kontakt">
                         <!-- Spam Protection -->
                         <input type="checkbox" name="botcheck" style="display: none;">
                         
@@ -1189,6 +1188,14 @@
             { name: 'brands.odaya.png', url: 'https://www.instagram.com/odaya' },
             { name: 'brands.cafe28.png', url: 'https://www.instagram.com/cafe_28' },
             { name: 'brands.burgerloft.png', url: 'https://www.instagram.com/burgerloft' },
+            { name: 'brands.kofteburger.png', url: 'https://www.instagram.com/kofteburger' },
+            { name: 'brands.lades.png', url: 'https://www.instagram.com/lades' },
+            { name: 'brands.kita.png', url: 'https://www.instagram.com/kita' },
+            { name: 'brands.oeziskabab.png', url: 'https://www.instagram.com/oeziskabab' },
+            { name: 'brands.roomyz.png', url: 'https://www.instagram.com/roomyz' },
+            { name: 'brands.sosyete.png', url: 'https://www.instagram.com/sosyete' },
+            { name: 'brands.suppkultur.png', url: 'https://www.instagram.com/suppkultur' },
+            { name: 'brands.waldhallebuechen.png', url: 'https://www.instagram.com/waldhallebuechen' }
         ];
 
         // ======================
@@ -1815,6 +1822,46 @@
         // ======================
         // CONTACT FORM SUBMISSION
         // ======================
+        const form = document.getElementById('contactForm');
+        const result = document.createElement('div');
+        
+        form.addEventListener('submit', function(e) {
+            const formData = new FormData(form);
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            submitButton.textContent = 'Wird gesendet...';
+            submitButton.disabled = true;
+            
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    result.innerHTML = `<div style="position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #4FC3F7, #00bcd4); color: white; padding: 20px 40px; border-radius: 15px; box-shadow: 0 10px 40px rgba(79,195,247,0.5); z-index: 10000; font-size: 18px; font-weight: bold;">✅ Nachricht erfolgreich gesendet!</div>`;
+                    document.body.appendChild(result);
+                    form.reset();
+                    setTimeout(() => result.remove(), 5000);
+                } else {
+                    result.innerHTML = `<div style="position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #ff5252, #ff1744); color: white; padding: 20px 40px; border-radius: 15px; box-shadow: 0 10px 40px rgba(255,82,82,0.5); z-index: 10000; font-size: 18px; font-weight: bold;">❌ Fehler: ${data.message}</div>`;
+                    document.body.appendChild(result);
+                    setTimeout(() => result.remove(), 5000);
+                }
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            })
+            .catch(error => {
+                result.innerHTML = `<div style="position: fixed; top: 100px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #ff5252, #ff1744); color: white; padding: 20px 40px; border-radius: 15px; box-shadow: 0 10px 40px rgba(255,82,82,0.5); z-index: 10000; font-size: 18px; font-weight: bold;">❌ Fehler beim Senden</div>`;
+                document.body.appendChild(result);
+                setTimeout(() => result.remove(), 5000);
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            });
+            
+            e.preventDefault();
+        });
 
         // ======================
         // FOOTER SOCIAL HOVER
